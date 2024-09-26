@@ -14,7 +14,7 @@ local lsp_attach = function(client, bufnr)
   vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
   vim.keymap.set('n', '<F2>', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
   vim.keymap.set({'n', 'x'}, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', opts)
-  vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+  vim.keymap.set('n', '<leader>.', vim.lsp.buf.code_action, { noremap = true, silent = true })
 end
 
 lsp_zero.extend_lspconfig({
@@ -80,7 +80,7 @@ lspconfig.stylelint_lsp.setup({
   filetypes = { "css", "scss", "less" },
   on_attach = function(client, bufnr)
     local filetype = vim.api.nvim_buf_get_option(bufnr, 'filetype')
-    if filetype == 'typescriptreact' then
+    if filetype == 'typescriptreact' or filetype == 'typescript' then
       client.stop()
     end
   end,

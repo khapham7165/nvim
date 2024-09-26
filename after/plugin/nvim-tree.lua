@@ -11,6 +11,10 @@ vim.keymap.set('n', '<C-b>', ':NvimTreeToggle<CR>', { noremap = true, silent = t
 
 -- OR setup with some options
 require("nvim-tree").setup({
+  update_focused_file = {
+    enable = true,
+    update_cwd = true,
+  },
   sort = {
     sorter = "case_sensitive",
   },

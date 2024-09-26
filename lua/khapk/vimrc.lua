@@ -7,7 +7,8 @@ vim.wo.relativenumber = true
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
-
+vim.opt.spell = true
+vim.opt.spelllang = { 'en_us' }
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()

@@ -38,11 +38,9 @@ return require('packer').startup(function(use)
     },
   }
   use {
-    'f-person/git-blame.nvim',
+    'lewis6991/gitsigns.nvim',
     config = function()
-      vim.g.gitblame_enabled = 1
-      vim.g.gitblame_message_template = '<author> • <date> • <summary>'
-      vim.g.gitblame_highlight_group = "LineNr"
+      require('gitsigns').setup()
     end
   }
 end)

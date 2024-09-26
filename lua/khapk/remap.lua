@@ -7,4 +7,7 @@ vim.keymap.set('n', '<leader>E', vim.diagnostic.goto_prev, { desc = 'Go to previ
 vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
 vim.keymap.set('n', '<leader>s', ':w<CR>', { noremap = true, silent = true })
-
+vim.keymap.set('n', '<leader>J', ':sp<CR><C-w>j', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>K', ':sp<CR><C-w>k', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>L', ':vs<CR><C-w>l', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>H', ':vs<CR><C-w>h', { noremap = true, silent = true })

@@ -6,7 +6,7 @@ vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
 local api = require('nvim-tree.api')
 
-vim.keymap.set('n', '<leader>n', api.fs.create, { desc = 'Create new file in nvim-tree' })
+vim.keymap.set('n', '<C-n>', api.fs.create, { desc = 'Create new file in nvim-tree' })
 vim.keymap.set('n', '<C-b>', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
 
 -- OR setup with some options

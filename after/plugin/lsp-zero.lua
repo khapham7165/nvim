@@ -24,9 +24,11 @@ lsp_zero.extend_lspconfig({
 })
 
 local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
 
 cmp.setup({
   sources = {
+    {name = 'cody'},
     {name = 'nvim_lsp'},
   },
   snippet = {
@@ -35,15 +37,16 @@ cmp.setup({
       vim.snippet.expand(args.body)
     end,
   },
-  mapping = cmp.mapping.preset.insert({}),
-})
-
-local cmp_action = require('lsp-zero').cmp_action()
-
-cmp.setup({
-  mapping = cmp.mapping.preset.insert({
+   mapping = cmp.mapping.preset.insert({
     ['<Tab>'] = cmp_action.tab_complete(),
     ['<S-Tab>'] = cmp.mapping.select_prev_item({behavior = 'select'}),
+    ["<c-a>"] = cmp.mapping.complete {
+      config = {
+        sources = {
+          { name = "cody" },
+        },
+      },
+    },
   }),
 })
 

@@ -43,4 +43,5 @@ return require('packer').startup(function(use)
   }
   use {'lewis6991/gitsigns.nvim'}
   use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
+  use { 'nvim-lua/plenary.nvim' }
 end)

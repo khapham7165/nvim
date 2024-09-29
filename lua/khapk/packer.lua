@@ -21,7 +21,6 @@ return require('packer').startup(function(use)
   use { "catppuccin/nvim", as = "catppuccin" }
 
   use({'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'})
-  use({'neovim/nvim-lspconfig'})
   use({'hrsh7th/nvim-cmp'})
   use({'hrsh7th/cmp-nvim-lsp'})
 
@@ -45,4 +44,7 @@ return require('packer').startup(function(use)
   use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
   use { 'nvim-lua/plenary.nvim' }
   use { 'norcalli/nvim-colorizer.lua' }
+  use 'Mofiqul/dracula.nvim'
+  use "lukas-reineke/indent-blankline.nvim"
+
 end)

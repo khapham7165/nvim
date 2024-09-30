@@ -51,4 +51,5 @@ return require('packer').startup(function(use)
     'pwntester/octo.nvim',
   }
   use "sindrets/diffview.nvim"
+  use 'karb94/neoscroll.nvim'
 end)

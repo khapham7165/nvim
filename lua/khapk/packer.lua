@@ -46,5 +46,8 @@ return require('packer').startup(function(use)
   use { 'norcalli/nvim-colorizer.lua' }
   use 'Mofiqul/dracula.nvim'
   use "lukas-reineke/indent-blankline.nvim"
-
+  use {'akinsho/git-conflict.nvim', tag = "*"}
+  use {
+    'pwntester/octo.nvim',
+  }
 end)

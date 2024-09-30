@@ -50,4 +50,5 @@ return require('packer').startup(function(use)
   use {
     'pwntester/octo.nvim',
   }
+  use "sindrets/diffview.nvim"
 end)

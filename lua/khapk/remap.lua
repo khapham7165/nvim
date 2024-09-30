@@ -12,3 +12,6 @@ vim.keymap.set('n', '<leader>pl', ':vs<CR><C-w>l', { noremap = true, silent = tr
 vim.keymap.set('n', '<leader>ph', ':vs<CR><C-w>h', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>pa', ':Octo actions<CR>', { desc = 'Show all git actions' })
+vim.api.nvim_set_keymap('n', '<C-h>', ':DiffviewFileHistory %', { desc = 'Show file history' })
+vim.api.nvim_set_keymap('n', '<C-H>', ":'<,'>DiffviewFileHistory", { desc = 'Show line history' })
+

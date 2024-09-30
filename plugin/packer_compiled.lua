@@ -84,6 +84,11 @@ _G.packer_plugins = {
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["diffview.nvim"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/diffview.nvim",
+    url = "https://github.com/sindrets/diffview.nvim"
+  },
   ["dracula.nvim"] = {
     loaded = true,
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/dracula.nvim",

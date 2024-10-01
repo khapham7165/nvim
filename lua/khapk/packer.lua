@@ -52,4 +52,29 @@ return require('packer').startup(function(use)
   }
   use "sindrets/diffview.nvim"
   use 'karb94/neoscroll.nvim'
+  use {
+    "nvim-neo-tree/neo-tree.nvim",
+    branch = "v3.x",
+    requires = { 
+      "nvim-lua/plenary.nvim",
+      "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+      "MunifTanjim/nui.nvim",
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+      {
+        's1n7ax/nvim-window-picker',
+        version = '2.*',
+
+      },
+    },
+  }
+  use 'folke/which-key.nvim'
+  use {"akinsho/toggleterm.nvim"}
+  -- lazy.nvim
+  use {
+    "folke/noice.nvim",
+    require = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    }
+  }
 end)

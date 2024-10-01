@@ -129,10 +129,25 @@ _G.packer_plugins = {
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["neo-tree.nvim"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
+    url = "https://github.com/nvim-neo-tree/neo-tree.nvim"
+  },
   ["neoscroll.nvim"] = {
     loaded = true,
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/neoscroll.nvim",
     url = "https://github.com/karb94/neoscroll.nvim"
+  },
+  ["noice.nvim"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/noice.nvim",
+    url = "https://github.com/folke/noice.nvim"
+  },
+  ["nui.nvim"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/nui.nvim",
+    url = "https://github.com/MunifTanjim/nui.nvim"
   },
   ["nvim-cmp"] = {
     loaded = true,
@@ -164,6 +179,11 @@ _G.packer_plugins = {
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
     url = "https://github.com/nvim-tree/nvim-web-devicons"
   },
+  ["nvim-window-picker"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/nvim-window-picker",
+    url = "https://github.com/s1n7ax/nvim-window-picker"
+  },
   ["octo.nvim"] = {
     loaded = true,
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/octo.nvim",
@@ -188,6 +208,16 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["toggleterm.nvim"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
+  },
+  ["which-key.nvim"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/which-key.nvim",
+    url = "https://github.com/folke/which-key.nvim"
   }
 }
 

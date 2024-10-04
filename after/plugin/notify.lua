@@ -1,1 +1,13 @@
-require("notify").setup({})
+-- require("notify").setup({
+--   render = "minimal",
+--   stages = "fade_in_slide_out",
+--   timeout = 2000, -- Timeout in milliseconds
+--   max_height = function()
+--     return math.floor(vim.o.lines * 0.25) -- Take up 25% of the screen height
+--   end,
+--   max_width = function()
+--     return math.floor(vim.o.columns * 0.5) -- Take up 50% of the screen width
+--   end,
+--   set_minimal_height = true,
+--   set_minimal_width = true,
+-- })

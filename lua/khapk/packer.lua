@@ -55,7 +55,7 @@ return require('packer').startup(function(use)
   use {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
-    requires = { 
+    requires = {
       "nvim-lua/plenary.nvim",
       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
       "MunifTanjim/nui.nvim",
@@ -69,13 +69,15 @@ return require('packer').startup(function(use)
   }
   use 'folke/which-key.nvim'
   use {"akinsho/toggleterm.nvim"}
-  -- lazy.nvim
-  use {
-    "folke/noice.nvim",
-    require = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    }
-  }
-  use 'rcarriga/nvim-notify'
+
+  -- use {
+  --   "folke/noice.nvim",
+  --   require = {
+  --     "MunifTanjim/nui.nvim",
+  --     "rcarriga/nvim-notify",
+  --   }
+  -- }
+  -- use 'rcarriga/nvim-notify'
+
+  use 'tpope/vim-commentary'
 end)

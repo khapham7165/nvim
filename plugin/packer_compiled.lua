@@ -139,11 +139,6 @@ _G.packer_plugins = {
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/neoscroll.nvim",
     url = "https://github.com/karb94/neoscroll.nvim"
   },
-  ["noice.nvim"] = {
-    loaded = true,
-    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/noice.nvim",
-    url = "https://github.com/folke/noice.nvim"
-  },
   ["nui.nvim"] = {
     loaded = true,
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/nui.nvim",
@@ -163,11 +158,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
-  },
-  ["nvim-notify"] = {
-    loaded = true,
-    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/nvim-notify",
-    url = "https://github.com/rcarriga/nvim-notify"
   },
   ["nvim-tree.lua"] = {
     loaded = true,
@@ -218,6 +208,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
     url = "https://github.com/akinsho/toggleterm.nvim"
+  },
+  ["vim-commentary"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/vim-commentary",
+    url = "https://github.com/tpope/vim-commentary"
   },
   ["which-key.nvim"] = {
     loaded = true,

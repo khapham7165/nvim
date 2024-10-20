@@ -84,6 +84,16 @@ _G.packer_plugins = {
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["codewindow.nvim"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/codewindow.nvim",
+    url = "https://github.com/gorbit99/codewindow.nvim"
+  },
+  ["codi.vim"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/codi.vim",
+    url = "https://github.com/metakirby5/codi.vim"
+  },
   ["diffview.nvim"] = {
     loaded = true,
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/diffview.nvim",
@@ -129,6 +139,11 @@ _G.packer_plugins = {
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/mason.nvim",
     url = "https://github.com/williamboman/mason.nvim"
   },
+  ["mini.nvim"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/mini.nvim",
+    url = "https://github.com/echasnovski/mini.nvim"
+  },
   ["neo-tree.nvim"] = {
     loaded = true,
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/neo-tree.nvim",
@@ -168,6 +183,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
+  },
+  ["nvim-ts-autotag"] = {
+    loaded = true,
+    path = "/Users/khapham/.local/share/nvim/site/pack/packer/start/nvim-ts-autotag",
+    url = "https://github.com/windwp/nvim-ts-autotag"
   },
   ["nvim-web-devicons"] = {
     loaded = true,

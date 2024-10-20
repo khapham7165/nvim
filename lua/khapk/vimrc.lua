@@ -21,5 +21,3 @@ vim.opt.display = "lastline"
 vim.g.indent_blankline_show_current_context = true
 vim.g.indent_blankline_context_patterns = {'class', 'function', 'method', '^if', '^while', '^for', '^object', '^table', 'block', 'arguments'}
 vim.g.indent_blankline_char = '▏'
--- open git status command
-vim.api.nvim_set_keymap('n', '<leader>gs', ':Neotree float git_status<CR>', { noremap = true, silent = true, desc = 'Show git status' })

@@ -34,5 +34,5 @@ function _terminal_toggle()
   term:toggle()
 end
 
-vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true, desc = "toggle lazygit"})
-vim.api.nvim_set_keymap("n", "<leader>pt", "<cmd>lua _terminal_toggle()<CR>", {noremap = true, silent = true, desc = "toggle terminal"})
+vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true, desc = "Toggle lazygit"})
+vim.api.nvim_set_keymap("n", "<leader>pt", "<cmd>lua _terminal_toggle()<CR>", {noremap = true, silent = true, desc = "Toggle terminal"})

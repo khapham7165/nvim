@@ -5,31 +5,23 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
-  use 'wbthomason/packer.nvim'
-
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
     -- or                            , branch = '0.1.x',
     requires = { {'nvim-lua/plenary.nvim'} }
   }
-
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
-
   use { "catppuccin/nvim", as = "catppuccin" }
-
   use({'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'})
-  use({'hrsh7th/nvim-cmp'})
-  use({'hrsh7th/cmp-nvim-lsp'})
-
+  use 'wbthomason/packer.nvim'
   use {
     "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
     "neovim/nvim-lspconfig",
   }
-
   use {
     'nvim-tree/nvim-tree.lua',
     requires = {
@@ -40,17 +32,15 @@ return require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = { 'nvim-tree/nvim-web-devicons', opt = true }
   }
-  use {'lewis6991/gitsigns.nvim'}
+  use 'lewis6991/gitsigns.nvim'
   use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
-  use { 'nvim-lua/plenary.nvim' }
-  use { 'norcalli/nvim-colorizer.lua' }
+  use  'nvim-lua/plenary.nvim' 
+  use  'norcalli/nvim-colorizer.lua' 
   use 'Mofiqul/dracula.nvim'
-  use "lukas-reineke/indent-blankline.nvim"
+  use 'lukas-reineke/indent-blankline.nvim'
   use {'akinsho/git-conflict.nvim', tag = "*"}
-  use {
-    'pwntester/octo.nvim',
-  }
-  use "sindrets/diffview.nvim"
+  use 'pwntester/octo.nvim'
+  use 'sindrets/diffview.nvim'
   use 'karb94/neoscroll.nvim'
   use {
     "nvim-neo-tree/neo-tree.nvim",
@@ -68,16 +58,10 @@ return require('packer').startup(function(use)
     },
   }
   use 'folke/which-key.nvim'
-  use {"akinsho/toggleterm.nvim"}
-
-  -- use {
-  --   "folke/noice.nvim",
-  --   require = {
-  --     "MunifTanjim/nui.nvim",
-  --     "rcarriga/nvim-notify",
-  --   }
-  -- }
-  -- use 'rcarriga/nvim-notify'
-
+  use 'akinsho/toggleterm.nvim'
   use 'tpope/vim-commentary'
+  use 'gorbit99/codewindow.nvim'
+  use 'metakirby5/codi.vim'
+  use 'windwp/nvim-ts-autotag'
+  use 'echasnovski/mini.nvim'
 end)

@@ -8,14 +8,14 @@ return require('packer').startup(function(use)
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
     -- or                            , branch = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} }
+    requires = { { 'nvim-lua/plenary.nvim' } }
   }
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate'
   }
   use { "catppuccin/nvim", as = "catppuccin" }
-  use({'VonHeikemen/lsp-zero.nvim', branch = 'v4.x'})
+  use({ 'VonHeikemen/lsp-zero.nvim', branch = 'v4.x' })
   use 'wbthomason/packer.nvim'
   use {
     "williamboman/mason.nvim",
@@ -34,11 +34,11 @@ return require('packer').startup(function(use)
   }
   use 'lewis6991/gitsigns.nvim'
   use { 'sourcegraph/sg.nvim', run = 'nvim -l build/init.lua' }
-  use  'nvim-lua/plenary.nvim' 
-  use  'norcalli/nvim-colorizer.lua' 
+  use 'nvim-lua/plenary.nvim'
+  use 'norcalli/nvim-colorizer.lua'
   use 'Mofiqul/dracula.nvim'
   use 'lukas-reineke/indent-blankline.nvim'
-  use {'akinsho/git-conflict.nvim', tag = "*"}
+  use { 'akinsho/git-conflict.nvim', tag = "*" }
   use 'pwntester/octo.nvim'
   use 'sindrets/diffview.nvim'
   use 'karb94/neoscroll.nvim'

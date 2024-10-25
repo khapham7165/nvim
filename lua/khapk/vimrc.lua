@@ -1,3 +1,4 @@
+vim.cmd.colorscheme "catppuccin"
 vim.opt.expandtab = true
 
 vim.opt.tabstop = 2
@@ -19,5 +20,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 vim.opt.display = "lastline"
 vim.g.indent_blankline_show_current_context = true
-vim.g.indent_blankline_context_patterns = {'class', 'function', 'method', '^if', '^while', '^for', '^object', '^table', 'block', 'arguments'}
+vim.g.indent_blankline_context_patterns = { 'class', 'function', 'method', '^if', '^while', '^for', '^object', '^table',
+  'block', 'arguments' }
 vim.g.indent_blankline_char = '▏'

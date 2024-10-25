@@ -5,6 +5,8 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   -- Packer can manage itself
+  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
   use {
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
     -- or                            , branch = '0.1.x',
@@ -64,4 +66,16 @@ return require('packer').startup(function(use)
   use 'metakirby5/codi.vim'
   use 'windwp/nvim-ts-autotag'
   use 'echasnovski/mini.nvim'
+  use { 'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons' }
+  use 'github/copilot.vim'
+  use 'CopilotC-Nvim/CopilotChat.nvim'
+  use({
+    "utilyre/barbecue.nvim",
+    tag = "*",
+    requires = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons", -- optional dependency
+    },
+    after = "nvim-web-devicons",     -- keep this if you're using NvChad
+  })
 end)

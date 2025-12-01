@@ -9,17 +9,20 @@ vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 19
 vim.opt.spell = true
-vim.opt.spelllang = { 'en_us' }
+vim.opt.spelllang = {'en_us'}
 
 vim.opt.clipboard = "unnamedplus"
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function()
-    vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 100 })
+    vim.highlight.on_yank({
+      higroup = 'IncSearch',
+      timeout = 100
+    })
   end
 })
 vim.opt.display = "lastline"
 vim.g.indent_blankline_show_current_context = true
-vim.g.indent_blankline_context_patterns = { 'class', 'function', 'method', '^if', '^while', '^for', '^object', '^table',
-  'block', 'arguments' }
+vim.g.indent_blankline_context_patterns = {'class', 'function', 'method', '^if', '^while', '^for', '^object', '^table',
+                                           'block', 'arguments'}
 vim.g.indent_blankline_char = '▏'

@@ -56,16 +56,6 @@ return require('packer').startup(function(use)
   use 'pwntester/octo.nvim'
   use 'sindrets/diffview.nvim'
   use 'karb94/neoscroll.nvim'
-  use {
-    "nvim-neo-tree/neo-tree.nvim",
-    branch = "v3.x",
-    requires = {"nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-    "MunifTanjim/nui.nvim", {
-      's1n7ax/nvim-window-picker',
-      version = '2.*'
-
-    }}
-  }
   use 'folke/which-key.nvim'
   use 'akinsho/toggleterm.nvim'
   use 'tpope/vim-commentary'
@@ -100,5 +90,8 @@ return require('packer').startup(function(use)
   use 'nvim-telescope/telescope-ui-select.nvim'
   use 'stevearc/dressing.nvim'
   use 'SergioRibera/cmp-dotenv'
-  use {"ray-x/lsp_signature.nvim", branch = "master"}
+  use {
+    "ray-x/lsp_signature.nvim",
+    branch = "master"
+  }
 end)

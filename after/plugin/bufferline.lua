@@ -5,7 +5,7 @@ bufferline.setup({
     hover = {
       enabled = true,
       delay = 200,
-      reveal = { 'close' }
+      reveal = {'close'}
     },
     style_preset = bufferline.style_preset.no_italic,
     diagnostics_indicator = function(count, level)

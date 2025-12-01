@@ -1,7 +1,5 @@
-require("ibl").setup(
-  {
-    indent = {
-      char = "▏",
-    }
+require("ibl").setup({
+  indent = {
+    char = "▏"
   }
-)
+})

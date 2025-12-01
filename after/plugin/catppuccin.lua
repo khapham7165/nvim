@@ -39,6 +39,10 @@ require("catppuccin").setup({
     nvimtree = true,
     treesitter = true,
     notify = false,
+    bufferline = true,
+    telescope = {
+      enalbed = true,
+    },
     mini = {
       enabled = true,
       indentscope_color = "",

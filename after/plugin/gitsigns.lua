@@ -1,16 +1,28 @@
 require('gitsigns').setup {
   signs = {
-    add          = { text = '│' },
-    change       = { text = '│' },
-    delete       = { text = '_' },
-    topdelete    = { text = '‾' },
-    changedelete = { text = '~' },
-    untracked    = { text = '┆' },
+    add = {
+      text = '│'
+    },
+    change = {
+      text = '│'
+    },
+    delete = {
+      text = '_'
+    },
+    topdelete = {
+      text = '‾'
+    },
+    changedelete = {
+      text = '~'
+    },
+    untracked = {
+      text = '┆'
+    }
   },
   signcolumn = true,
-  numhl      = false,
-  linehl     = false,
-  word_diff  = false,
+  numhl = false,
+  linehl = false,
+  word_diff = false,
   watch_gitdir = {
     interval = 1000,
     follow_files = true
@@ -21,7 +33,7 @@ require('gitsigns').setup {
     virt_text = true,
     virt_text_pos = 'eol',
     delay = 400,
-    ignore_whitespace = false,
+    ignore_whitespace = false
   },
   current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
   sign_priority = 6,
@@ -29,16 +41,21 @@ require('gitsigns').setup {
   status_formatter = nil,
   max_file_length = 40000,
   preview_config = {
-    border = 'single',
+    border = 'rounded',
     style = 'minimal',
     relative = 'cursor',
     row = 0,
     col = 1
-  },
+  }
 }
 
 -- Set up the new highlights
-vim.api.nvim_set_hl(0, 'GitSignsAdd', { link = 'DiffAdd' })
-vim.api.nvim_set_hl(0, 'GitSignsChange', { link = 'DiffChange' })
-vim.api.nvim_set_hl(0, 'GitSignsDelete', { link = 'DiffDelete' })
-
+vim.api.nvim_set_hl(0, 'GitSignsAdd', {
+  link = 'DiffAdd'
+})
+vim.api.nvim_set_hl(0, 'GitSignsChange', {
+  link = 'DiffChange'
+})
+vim.api.nvim_set_hl(0, 'GitSignsDelete', {
+  link = 'DiffDelete'
+})

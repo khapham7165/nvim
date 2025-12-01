@@ -8,18 +8,29 @@ vim.opt.termguicolors = true
 require("nvim-tree").setup({
   update_focused_file = {
     enable = true,
-    update_cwd = true,
+    update_cwd = true
   },
   sort = {
-    sorter = "case_sensitive",
+    sorter = "case_sensitive"
   },
   view = {
-    width = 30,
+    side = "right",
+    float = {
+      enable = true,
+      open_win_config = {
+        relative = "editor",
+        border = "rounded",
+        width = 45,
+        height = 45,
+        row = 1,
+        col = 1
+      }
+    }
   },
   renderer = {
-    group_empty = true,
+    group_empty = true
   },
   filters = {
-    dotfiles = false,
-  },
+    enable = false
+  }
 })

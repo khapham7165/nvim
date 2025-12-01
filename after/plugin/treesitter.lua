@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require 'nvim-treesitter.configs'.setup {
   ensure_installed = { "typescript", "javascript", "tsx", "c", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline" },
   textobjects = {
     select = {
@@ -42,4 +42,6 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = true
   },
+  modules = {},
+  ignore_install = {}
 }

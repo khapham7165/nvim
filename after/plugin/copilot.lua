@@ -1,2 +1,1 @@
-vim.cmd(':Copilot setup')
-
+-- vim.cmd(':Copilot setup &')

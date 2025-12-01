@@ -7,7 +7,7 @@ vim.opt.shiftwidth = 2
 vim.wo.relativenumber = true
 vim.opt.number = true
 vim.opt.cursorline = true
-vim.opt.scrolloff = 29
+vim.opt.scrolloff = 19
 vim.opt.spell = true
 vim.opt.spelllang = { 'en_us' }
 

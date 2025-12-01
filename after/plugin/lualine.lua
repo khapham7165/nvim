@@ -152,13 +152,14 @@ ins_left {
     info = { fg = colors.cyan },
   },
 }
+
 ins_left {
   'diff',
   -- Is it me or the symbol for modified us really weird
-  symbols = { added = ' ', modified = '󰝤 ', removed = ' ' },
+  symbols = { added = '󰐖 ', modified = '󱗜 ', removed = '󰍵 ' },
   diff_color = {
     added = { fg = colors.green },
-    modified = { fg = colors.orange },
+    modified = { fg = colors.blue },
     removed = { fg = colors.red },
   },
   cond = conditions.hide_in_width,
@@ -183,8 +184,8 @@ ins_right {
   -- Lsp server names.
   function()
     local msg = 'No Active Lsp'
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
+    local buf_ft = vim.bo.filetype
+    local clients = vim.lsp.get_clients()
     if next(clients) == nil then
       return msg
     end

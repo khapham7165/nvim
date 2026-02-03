@@ -1,48 +1,7 @@
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = {"typescript", "javascript", "tsx", "c", "lua", "vim", "vimdoc", "query", "markdown",
-                      "markdown_inline"},
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true,
-      keymaps = {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner"
-      }
-    },
-    move = {
-      enable = true,
-      set_jumps = true,
-      goto_next_start = {
-        ["]m"] = "@function.outer",
-        ["]]"] = "@class.outer"
-      },
-      goto_next_end = {
-        ["]M"] = "@function.outer",
-        ["]["] = "@class.outer"
-      },
-      goto_previous_start = {
-        ["[m"] = "@function.outer",
-        ["[["] = "@class.outer"
-      },
-      goto_previous_end = {
-        ["[M"] = "@function.outer",
-        ["[]"] = "@class.outer"
-      }
-    }
-  },
-  sync_install = false,
-  auto_install = true,
-  highlight = {
-    enable = true,
-
-    additional_vim_regex_highlighting = false
-  },
-  indent = {
-    enable = true
-  },
-  modules = {},
-  ignore_install = {}
+require'nvim-treesitter'.setup {
+  -- Directory to install parsers and queries to (prepended to `runtimepath` to have priority)
+  install_dir = vim.fn.stdpath('data') .. '/site'
 }
+
+require'nvim-treesitter'.install {'typescript', 'javascript', 'tsx', 'c', 'lua', 'vim', 'vimdoc', 'query', 'markdown',
+                                  'markdown_inline'}

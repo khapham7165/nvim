@@ -5,23 +5,23 @@ vim.cmd [[packadd packer.nvim]]
 return require('packer').startup(function(use)
   -- Packer can manage itself
   use 'hrsh7th/nvim-cmp'
-  use 'hrsh7th/cmp-buffer' -- Buffer completions
-  use 'hrsh7th/cmp-path' -- Path completions
-  use 'hrsh7th/cmp-nvim-lsp' -- LSP completions
+  use 'hrsh7th/cmp-buffer'       -- Buffer completions
+  use 'hrsh7th/cmp-path'         -- Path completions
+  use 'hrsh7th/cmp-nvim-lsp'     -- LSP completions
   use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
   use {
     'L3MON4D3/LuaSnip',
-    requires = {'saadparwaiz1/cmp_luasnip'}
+    requires = { 'saadparwaiz1/cmp_luasnip' }
   }
   use {
     'nvim-telescope/telescope.nvim',
-    tag = '0.1.8',
-    -- or                            , branch = '0.1.x',
-    requires = {{'nvim-lua/plenary.nvim'}}
+    version = '*',
+    requires = { 'nvim-lua/plenary.nvim' }
   }
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    lazy = false,
+    build = ':TSUpdate'
   }
   use {
     "catppuccin/nvim",
@@ -32,10 +32,10 @@ return require('packer').startup(function(use)
     branch = 'v4.x'
   })
   use 'wbthomason/packer.nvim'
-  use {"williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig"}
+  use { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig" }
   use {
     'nvim-tree/nvim-tree.lua',
-    requires = {'nvim-tree/nvim-web-devicons' -- optional
+    requires = { 'nvim-tree/nvim-web-devicons' -- optional
     }
   }
   use {
@@ -59,7 +59,6 @@ return require('packer').startup(function(use)
   use 'folke/which-key.nvim'
   use 'akinsho/toggleterm.nvim'
   use 'tpope/vim-commentary'
-  use 'gorbit99/codewindow.nvim'
   use 'metakirby5/codi.vim'
   use 'windwp/nvim-ts-autotag'
   use 'echasnovski/mini.nvim'
@@ -79,13 +78,13 @@ return require('packer').startup(function(use)
   use({
     "utilyre/barbecue.nvim",
     tag = "*",
-    requires = {"SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons" -- optional dependency
+    requires = { "SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons" -- optional dependency
     },
-    after = "nvim-web-devicons" -- keep this if you're using NvChad
+    after = "nvim-web-devicons"                                       -- keep this if you're using NvChad
   })
   use {
     'nvim-telescope/telescope-media-files.nvim',
-    dependencies = {'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim'}
+    dependencies = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' }
   }
   use 'nvim-telescope/telescope-ui-select.nvim'
   use 'stevearc/dressing.nvim'

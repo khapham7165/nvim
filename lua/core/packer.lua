@@ -20,23 +20,17 @@ return require('packer').startup(function(use)
   }
   use {
     'nvim-treesitter/nvim-treesitter',
-    lazy = false,
-    build = ':TSUpdate'
+    run = ':TSUpdate'
   }
   use {
     "catppuccin/nvim",
     as = "catppuccin"
   }
-  use({
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v4.x'
-  })
   use 'wbthomason/packer.nvim'
   use { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim", "neovim/nvim-lspconfig" }
   use {
     'nvim-tree/nvim-tree.lua',
-    requires = { 'nvim-tree/nvim-web-devicons' -- optional
-    }
+    requires = {'nvim-tree/nvim-web-devicons'}
   }
   use {
     'nvim-lualine/lualine.nvim',
@@ -78,13 +72,12 @@ return require('packer').startup(function(use)
   use({
     "utilyre/barbecue.nvim",
     tag = "*",
-    requires = { "SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons" -- optional dependency
-    },
-    after = "nvim-web-devicons"                                       -- keep this if you're using NvChad
+    requires = {"SmiteshP/nvim-navic", "nvim-tree/nvim-web-devicons"},
+    after = "nvim-web-devicons"
   })
   use {
     'nvim-telescope/telescope-media-files.nvim',
-    dependencies = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' }
+    requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope.nvim' }
   }
   use 'nvim-telescope/telescope-ui-select.nvim'
   use 'stevearc/dressing.nvim'

@@ -1,49 +1,54 @@
-require("toggleterm").setup()
-local Terminal = require("toggleterm.terminal").Terminal
+require('toggleterm').setup({})
+
+local Terminal = require('toggleterm.terminal').Terminal
+
+local function close_with_q(term)
+  vim.keymap.set('n', 'q', '<cmd>close<CR>', {
+    buffer = term.bufnr,
+    silent = true,
+    desc = '[q] Close terminal'
+  })
+end
 
 local lazygit = Terminal:new({
-  cmd = "lazygit",
-  dir = "git_dir",
-  direction = "float",
+  cmd = 'lazygit',
+  dir = 'git_dir',
+  direction = 'float',
   float_opts = {
-    border = "rounded"
+    border = 'rounded'
   },
-  -- function to run on opening the terminal
   on_open = function(term)
-    vim.cmd("startinsert!")
-    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {
-      noremap = true,
-      silent = true
-    })
-  end,
-  -- function to run on closing the terminal
-  on_close = function(term)
-    vim.cmd("startinsert!")
+    close_with_q(term)
+    vim.cmd('startinsert')
   end
 })
 
-function _lazygit_toggle()
-  lazygit:toggle()
-end
-
-function _terminal_toggle()
-  local term = Terminal:new({
-    dir = "git_dir",
-    direction = "float",
-    float_opts = {
-      border = "rounded"
-    }
-  })
-  term:toggle()
-end
-
-vim.api.nvim_set_keymap("n", "<leader>gg", "<cmd>lua _lazygit_toggle()<CR>", {
-  noremap = true,
-  silent = true,
-  desc = "Toggle lazygit"
+local terminal = Terminal:new({
+  dir = 'git_dir',
+  direction = 'float',
+  float_opts = {
+    border = 'rounded'
+  },
+  on_open = function(term)
+    close_with_q(term)
+    vim.cmd('startinsert')
+  end
 })
-vim.api.nvim_set_keymap("n", "<leader>pt", "<cmd>lua _terminal_toggle()<CR>", {
-  noremap = true,
+
+vim.keymap.set('n', '<leader>gg', function()
+  if vim.fn.executable('lazygit') ~= 1 then
+    vim.notify('Lazygit is not installed (`brew install lazygit`)', vim.log.levels.ERROR)
+    return
+  end
+  lazygit:toggle()
+end, {
   silent = true,
-  desc = "Toggle terminal"
+  desc = '[g] Toggle Lazygit'
+})
+
+vim.keymap.set('n', '<leader>pt', function()
+  terminal:toggle()
+end, {
+  silent = true,
+  desc = '[t] Toggle terminal'
 })

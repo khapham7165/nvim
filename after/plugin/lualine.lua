@@ -33,6 +33,21 @@ local conditions = {
   end
 }
 
+local lsp_icons = {
+  cssls = '',
+  cssmodules_ls = '󰌜',
+  eslint = '',
+  html = '',
+  intelephense = '',
+  lua_ls = '',
+  pyright = '',
+  somesass_ls = '',
+  stimulus_ls = '',
+  stylelint_lsp = '',
+  tailwindcss = '󱏿',
+  ts_ls = ''
+}
+
 -- Config
 local config = {
   options = {
@@ -210,7 +225,7 @@ end}
 
 ins_left {
   function()
-    return '[Codex] ⌐■-■'
+    return '[Calix]'
   end,
   color = {
     fg = colors.violet
@@ -218,28 +233,28 @@ ins_left {
 }
 
 ins_right {
-  -- Lsp server names.
+  -- Compact icons for LSP servers attached to the current buffer.
   function()
-    local msg = 'No Active Lsp'
-    local buf_ft = vim.bo.filetype
-    local clients = vim.lsp.get_clients()
-    if next(clients) == nil then
-      return msg
-    end
-    local client_names = {}
+    local clients = vim.lsp.get_clients({
+      bufnr = 0
+    })
+    local client_icons = {}
+    local seen_icons = {}
+
     for _, client in ipairs(clients) do
-      local filetypes = client.config.filetypes
-      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-        table.insert(client_names, client.name)
+      local icon = lsp_icons[client.name] or ''
+      if not seen_icons[icon] then
+        table.insert(client_icons, icon)
+        seen_icons[icon] = true
       end
     end
-    if #client_names == 0 then
-      return msg
-    else
-      return table.concat(client_names, '|')
+
+    if #client_icons == 0 then
+      return '󰅚'
     end
-  end,
-  icon = ' '
+
+    return table.concat(client_icons, ' ')
+  end
 }
 
 -- Add components to right sections

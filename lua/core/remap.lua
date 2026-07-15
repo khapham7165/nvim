@@ -1,59 +1,17 @@
 vim.g.mapleader = " "
 
 local builtin = require('telescope.builtin')
--- Window navigation
-local window_nav_keymaps = {{
-  mode = 'n',
-  lhs = '<C-u>',
-  rhs = '<C-u>zz',
-  noremap = true,
-  silent = true,
-  desc = 'Scroll [u]p'
-}, {
-  mode = 'n',
-  lhs = '<leader>w',
-  rhs = '<C-w>',
-  desc = 'Move [w]indow'
-}, {
-  mode = 'n',
-  lhs = '<leader>wj',
-  rhs = '<C-w>j',
-  noremap = true,
-  silent = true,
-  desc = '[j] Move to window bottom'
-}, {
-  mode = 'n',
-  lhs = '<leader>wh',
-  rhs = '<C-w>h',
-  noremap = true,
-  silent = true,
-  desc = '[h] Move to window left'
-}, {
-  mode = 'n',
-  lhs = '<leader>wk',
-  rhs = '<C-w>k',
-  noremap = true,
-  silent = true,
-  desc = '[k] Move to window top'
-}, {
-  mode = 'n',
-  lhs = '<leader>wl',
-  rhs = '<C-w>l',
-  noremap = true,
-  silent = true,
-  desc = '[l] Move to window right'
-}}
 
-for _, keymap in ipairs(window_nav_keymaps) do
-  vim.keymap.set(keymap.mode, keymap.lhs, keymap.rhs, {
-    desc = keymap.desc,
-    noremap = keymap.noremap,
-    silent = keymap.silent
-  })
+local function find_last_yank()
+  local text = vim.fn.getreg('"')
+  if text == '' then
+    return
+  end
+
+  local pattern = '\\V' .. vim.fn.escape(text, '\\')
+  vim.fn.search(pattern:gsub('\n', '\\n'))
 end
 
--- Window splitting
--- Define a single table to store all keymaps
 local all_keymaps = { -- Window navigation
 {
   mode = 'n',
@@ -68,7 +26,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>w',
   rhs = '<C-w>',
-  desc = '[w]indow commands'
+  desc = '[w] Window commands'
 }, {
   mode = 'n',
   lhs = '<leader>wj',
@@ -147,44 +105,44 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>g',
   rhs = '<nop>',
-  desc = '[g]it commands'
+  desc = '[g] Git commands'
 }, -- Git
 {
   mode = 'n',
   lhs = '<leader>ga',
   rhs = ':Octo actions<CR>',
-  desc = 'Show [a]ll git actions'
+  desc = '[a] Show all git actions'
 }, {
   mode = 'n',
   lhs = '<leader>gH',
   rhs = ':DiffviewFileHistory %<CR>',
-  desc = 'Show file git [H]istory'
+  desc = '[H] Show file git history'
 }, {
   mode = 'n',
   lhs = '<leader>gh',
   rhs = ":'<,'>DiffviewFileHistory<CR>",
-  desc = 'Show selected line [h]istory'
+  desc = '[h] Show selected line history'
 }, {
   mode = 'n',
   lhs = '<leader>gs',
   rhs = builtin.git_status,
-  desc = 'Show git [s]tatus'
+  desc = '[s] Show git status'
 }, -- Prefix: p (Project/Find)
 {
   mode = 'n',
   lhs = '<leader>p',
   rhs = '<nop>',
-  desc = '[p]roject/search commands'
+  desc = '[p] Project/search commands'
 }, {
   mode = 'n',
   lhs = '<leader>pf',
   rhs = builtin.treesitter,
-  desc = 'Find in [f]ile structure'
+  desc = '[f] Find in file structure'
 }, {
   mode = 'n',
   lhs = '<leader>gd',
   rhs = ':DiffviewOpen<CR>',
-  desc = 'Show [d]iff',
+  desc = '[d] Show diff',
   opts = {
     noremap = true,
     silent = true
@@ -193,7 +151,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>gD',
   rhs = ':DiffviewClose<CR>',
-  desc = 'Close git [D]iff',
+  desc = '[D] Close git diff',
   opts = {
     noremap = true,
     silent = true
@@ -202,7 +160,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>gb',
   rhs = ':Gitsigns blame_line<CR>',
-  desc = '[b]lame current line',
+  desc = '[b] Blame current line',
   opts = {
     noremap = true,
     silent = true
@@ -211,7 +169,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>gB',
   rhs = ':Gitsigns blame<CR>',
-  desc = '[B]lame entire file',
+  desc = '[B] Blame entire file',
   opts = {
     noremap = true,
     silent = true
@@ -221,12 +179,12 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>en',
   rhs = require('nvim-tree.api').fs.create,
-  desc = 'Create [n]ew file'
+  desc = '[n] Create new file'
 }, {
   mode = 'n',
   lhs = '<leader>ee',
   rhs = ':NvimTreeToggle<CR>',
-  desc = 'Toggle file [e]xplorer sidebar',
+  desc = '[e] Toggle file explorer sidebar',
   opts = {
     noremap = true,
     silent = true
@@ -320,13 +278,13 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>a',
   rhs = '<nop>',
-  desc = '[a]I commands'
+  desc = '[a] AI commands'
 }, -- AI
 {
   mode = 'n',
   lhs = '<leader>aa',
   rhs = ':CopilotChatToggle<CR>',
-  desc = 'Toggle [a]I chat window',
+  desc = '[a] Toggle AI chat window',
   opts = {
     noremap = true,
     silent = true
@@ -335,7 +293,7 @@ local all_keymaps = { -- Window navigation
   mode = 'v',
   lhs = '<leader>aa',
   rhs = ':CopilotChat<CR>',
-  desc = 'Ch[a]t with selected text',
+  desc = '[a] Chat with selected text',
   opts = {
     noremap = true,
     silent = true
@@ -345,47 +303,41 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>b',
   rhs = '<nop>',
-  desc = '[b]uffer commands'
+  desc = '[b] Buffer commands'
 }, -- Prefix: e (Explorer)
 {
   mode = 'n',
   lhs = '<leader>e',
   rhs = '<nop>',
-  desc = '[e]xplorer commands'
+  desc = '[e] Explorer commands'
 }, -- Prefix: f (Find)
 {
   mode = 'n',
   lhs = '<leader>f',
   rhs = '<nop>',
-  desc = '[f]ind/search commands'
+  desc = '[f] Find/search commands'
 }, -- Find last yanked text
 {
   mode = 'n',
   lhs = '<leader>fy',
-  rhs = ':lua Find_last_yank()<CR>',
-  desc = 'Find last [y]anked text',
+  rhs = find_last_yank,
+  desc = '[y] Find last yanked text',
   opts = {
     noremap = true,
     silent = true
   }
-}, -- Prefix: m (Minimap)
-{
-  mode = 'n',
-  lhs = '<leader>m',
-  rhs = '<nop>',
-  desc = '[m]inimap commands'
 }, -- Prefix: t (Tab)
 {
   mode = 'n',
   lhs = '<leader>t',
   rhs = '<nop>',
-  desc = '[t]ab commands'
+  desc = '[t] Tab commands'
 }, -- Tab shortcuts
 {
   mode = 'n',
   lhs = '<leader>tt',
   rhs = ':tabnew<CR>',
-  desc = 'Create new [t]ab',
+  desc = '[t] Create new tab',
   opts = {
     noremap = true,
     silent = true
@@ -394,7 +346,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>tc',
   rhs = ':tabclose<CR>',
-  desc = '[c]lose current tab',
+  desc = '[c] Close current tab',
   opts = {
     noremap = true,
     silent = true
@@ -403,7 +355,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>to',
   rhs = ':tabonly<CR>',
-  desc = 'Close all [o]ther tabs',
+  desc = '[o] Close all other tabs',
   opts = {
     noremap = true,
     silent = true
@@ -412,7 +364,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>tn',
   rhs = ':tabnext<CR>',
-  desc = 'Go to [n]ext tab',
+  desc = '[n] Go to next tab',
   opts = {
     noremap = true,
     silent = true
@@ -421,7 +373,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>tp',
   rhs = ':tabprevious<CR>',
-  desc = 'Go to [p]revious tab',
+  desc = '[p] Go to previous tab',
   opts = {
     noremap = true,
     silent = true
@@ -430,7 +382,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>tr',
   rhs = ':tabmove +1<CR>',
-  desc = 'Move tab [r]ight',
+  desc = '[r] Move tab right',
   opts = {
     noremap = true,
     silent = true
@@ -439,14 +391,13 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>tl',
   rhs = ':tabmove -1<CR>',
-  desc = 'Move tab [l]eft',
+  desc = '[l] Move tab left',
   opts = {
     noremap = true,
     silent = true
   }
 }}
 
--- Function to set up all keymaps
 local function setup_keymaps()
   for _, keymap in ipairs(all_keymaps) do
     local opts = vim.tbl_extend('force', {
@@ -456,19 +407,7 @@ local function setup_keymaps()
   end
 end
 
--- Set leader key
-vim.g.mapleader = " "
-
--- Set up keymaps
 setup_keymaps()
-
--- Define the Find_last_yank function
-function Find_last_yank()
-  local last_yank = vim.fn.getreg('"')
-  if last_yank ~= "" then
-    vim.cmd('/' .. vim.fn.escape(last_yank, '/'))
-  end
-end
 
 -- Create user commands
 vim.api.nvim_create_user_command('Q', 'quit', {
@@ -480,45 +419,60 @@ vim.api.nvim_create_user_command('W', 'write', {
 
 -- Move to the next buffer
 vim.keymap.set('n', ']b', '<cmd>BufferLineCycleNext<CR>', {
-  desc = 'Next b]uffer'
+  desc = '[b] Next buffer'
 })
 
 -- Move to the previous buffer
 vim.keymap.set('n', '[b', '<cmd>BufferLineCyclePrev<CR>', {
-  desc = 'Previous [buffer'
+  desc = '[b] Previous buffer'
 })
 
--- Close the current buffer
+-- Go to the buffer on the left
+vim.keymap.set('n', '<leader>bh', '<cmd>BufferLineCyclePrev<CR>', {
+  desc = '[h] Go to buffer left'
+})
+
+-- Go to the buffer on the right
+vim.keymap.set('n', '<leader>bl', '<cmd>BufferLineCycleNext<CR>', {
+  desc = '[l] Go to buffer right'
+})
+
+-- Pick a buffer to close
 vim.keymap.set('n', '<leader>bc', '<cmd>BufferLinePickClose<CR>', {
-  desc = '[c]lose buffer'
+  desc = '[c] Pick buffer to close'
+})
+
+-- Group actions that target all other buffers
+vim.keymap.set('n', '<leader>bo', '<nop>', {
+  desc = '[o] Other buffer commands'
 })
 
 -- Close the other buffers
 vim.keymap.set('n', '<leader>boc', '<cmd>BufferLineCloseOthers<CR>', {
-  desc = '[c]lose other buffers'
+  desc = '[c] Close other buffers'
 })
--- Close the right buffers
-vim.keymap.set('n', '<leader>brc', '<cmd>BufferLineCloseRight<CR>', {
-  desc = '[c]lose buffer to the right'
+-- Close buffers on the right
+vim.keymap.set('n', '<leader>bL', '<cmd>BufferLineCloseRight<CR>', {
+  desc = '[L] Close buffers right'
 })
--- Close the other buffers
-vim.keymap.set('n', '<leader>blc', '<cmd>BufferLineCloseLeft<CR>', {
-  desc = '[c]lose buffer to the left'
+-- Close buffers on the left
+vim.keymap.set('n', '<leader>bH', '<cmd>BufferLineCloseLeft<CR>', {
+  desc = '[H] Close buffers left'
 })
 
 -- Pick a buffer to go to
 vim.keymap.set('n', '<leader>bb', '<cmd>BufferLinePick<CR>', {
-  desc = 'Pick [b]uffer'
+  desc = '[b] Pick buffer'
 })
 
 -- Sort buffers by directory
 vim.keymap.set('n', '<leader>bd', '<cmd>BufferLineSortByDirectory<CR>', {
-  desc = 'Sort buffer by [d]irectory'
+  desc = '[d] Sort buffers by directory'
 })
 
--- Sort buffers by tab
-vim.keymap.set('n', '<leader>bt', '<cmd>BufferLineSortByLanguage<CR>', {
-  desc = 'Sort buffer by language [t]ype'
+-- Sort buffers by file extension
+vim.keymap.set('n', '<leader>bt', '<cmd>BufferLineSortByExtension<CR>', {
+  desc = '[t] Sort buffers by file type'
 })
 
 -- Move the current buffer to the left
@@ -533,225 +487,160 @@ vim.keymap.set('n', '<leader>bm', '<cmd>BufferLineMoveNext<CR>', {
 
 -- Toggle the current buffer's pin
 vim.keymap.set('n', '<leader>bp', '<cmd>BufferLineTogglePin<CR>', {
-  desc = '[p]in current buffer'
+  desc = '[p] Pin current buffer'
 })
 
--- Function to resize window height
-function resize_height(direction)
-  local cmd = direction == "increase" and "resize +10" or "resize -10"
-  vim.cmd(cmd)
-end
-
--- Function to resize window width
-function resize_width(direction)
-  local cmd = direction == "increase" and "vertical resize +10" or "vertical resize -10"
-  vim.cmd(cmd)
-end
-
--- Map keys for resizing height
-vim.api.nvim_set_keymap('n', '+', ':lua resize_height("decrease")<CR>', {
-  noremap = true,
-  silent = true
-})
-vim.api.nvim_set_keymap('n', '-', ':lua resize_height("increase")<CR>', {
-  noremap = true,
-  silent = true
-})
-
--- Map keys for resizing width
-vim.api.nvim_set_keymap('n', '>', ':lua resize_width("decrease")<CR>', {
-  noremap = true,
-  silent = true
-})
-vim.api.nvim_set_keymap('n', '<', ':lua resize_width("increase")<CR>', {
-  noremap = true,
-  silent = true
-})
-
--- Enable continuous resizing when holding down the keys
-vim.api.nvim_set_keymap('n', '<C-+>', ':lua resize_height("decrease")<CR>', {
-  noremap = true,
+vim.keymap.set('n', '<leader>w+', '<cmd>resize +5<CR>', {
   silent = true,
-  expr = true
+  desc = '[+] Increase window height'
 })
-vim.api.nvim_set_keymap('n', '<C-->', ':lua resize_height("increase")<CR>', {
-  noremap = true,
+vim.keymap.set('n', '<leader>w-', '<cmd>resize -5<CR>', {
   silent = true,
-  expr = true
+  desc = '[-] Decrease window height'
 })
-vim.api.nvim_set_keymap('n', '<C->>', ':lua resize_width("decrease")<CR>', {
-  noremap = true,
+vim.keymap.set('n', '<leader>w>', '<cmd>vertical resize +5<CR>', {
   silent = true,
-  expr = true
+  desc = '[>] Increase window width'
 })
-vim.api.nvim_set_keymap('n', '<C-<>', ':lua resize_width("increase")<CR>', {
-  noremap = true,
+vim.keymap.set('n', '<leader>w<', '<cmd>vertical resize -5<CR>', {
   silent = true,
-  expr = true
+  desc = '[<] Decrease window width'
 })
 
-function GoToDefinitionInFloat()
-  local params = vim.lsp.util.make_position_params()
-  vim.lsp.buf_request(0, 'textDocument/definition', params, function(err, result, ctx, _)
-    if err or not result or vim.tbl_isempty(result) then
-      print("No definition found")
-      return
-    end
-
-    if #result == 1 then
-      vim.lsp.util.jump_to_location(result[1])
-    else
-      local items = {}
-      local max_width = 0
-      for i, res in ipairs(result) do
-        local uri = res.uri or res.targetUri
-        local range = res.range or res.targetRange
-        local filename = vim.uri_to_fname(uri)
-        local display_filename = vim.fn.fnamemodify(filename, ":~:.")
-        local text = string.format("%d: %s", i, display_filename)
-        table.insert(items, {
-          text = text,
-          location = res
-        })
-        max_width = math.max(max_width, #text)
-      end
-
-      local bufnr = vim.api.nvim_create_buf(false, true)
-      vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, vim.tbl_map(function(item)
-        return item.text
-      end, items))
-      vim.api.nvim_buf_set_option(bufnr, 'modifiable', false)
-
-      local width = math.max(max_width, 40)
-      local height = math.max(#items, 2)
-      local opts = {
-        relative = 'cursor',
-        width = width,
-        height = height,
-        col = 0,
-        row = 1,
-        style = 'minimal',
-        border = 'rounded'
-      }
-
-      local win_id = vim.api.nvim_open_win(bufnr, true, opts)
-
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<CR>', '', {
-        noremap = true,
-        silent = true,
-        callback = function()
-          local line = vim.fn.line('.') - 1
-          local location = items[line + 1].location
-          vim.api.nvim_win_close(win_id, true)
-          vim.lsp.util.jump_to_location(location)
-        end
-      })
-
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', 'q', '', {
-        noremap = true,
-        silent = true,
-        callback = function()
-          vim.api.nvim_win_close(win_id, true)
-        end
-      })
-
-      vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Esc>', '', {
-        noremap = true,
-        silent = true,
-        callback = function()
-          vim.api.nvim_win_close(win_id, true)
-        end
-      })
-    end
-  end)
-end
-
-vim.api.nvim_set_keymap('n', 'gb1', ':BufferLineGoToBuffer 1<CR>', {
-  noremap = true,
+vim.keymap.set('n', 'gb1', '<cmd>BufferLineGoToBuffer 1<CR>', {
   silent = true,
   desc = 'Go to buffer [1]'
 })
-vim.api.nvim_set_keymap('n', 'gb2', ':BufferLineGoToBuffer 2<CR>', {
-  noremap = true,
+vim.keymap.set('n', 'gb2', '<cmd>BufferLineGoToBuffer 2<CR>', {
   silent = true,
   desc = 'Go to buffer [2]'
 })
-vim.api.nvim_set_keymap('n', 'gb3', ':BufferLineGoToBuffer 3<CR>', {
-  noremap = true,
+vim.keymap.set('n', 'gb3', '<cmd>BufferLineGoToBuffer 3<CR>', {
   silent = true,
   desc = 'Go to buffer [3]'
 })
-function copy_current_buffer_path_to_clipboard()
-  local current_buffer_path = vim.fn.expand('%') -- Get the full path of the current buffer
-  vim.fn.setreg('+', current_buffer_path) -- Copy the path to the clipboard register
-  print("Copied to clipboard: " .. current_buffer_path)
-end
-
-vim.api.nvim_set_keymap('n', '<leader>by', ':lua copy_current_buffer_path_to_clipboard()<CR>', {
-  noremap = true,
+vim.keymap.set('n', '<leader>by', function()
+  local path = vim.fn.expand('%:p')
+  vim.fn.setreg('+', path)
+  vim.notify('Copied buffer path: ' .. path)
+end, {
   silent = true,
-  desc = '[y]ank buffer path to clipboard'
+  desc = '[y] Copy buffer path'
 })
 vim.keymap.set('n', '<leader>pa', builtin.find_files, {
-  desc = 'Find [a]ll files'
+  desc = '[a] Find all files'
 })
 vim.keymap.set('n', '<leader>pe', builtin.git_files, {
-  desc = '[e]xplore git files'
+  desc = '[e] Explore git files'
 })
 vim.keymap.set('n', '<leader>pg', builtin.live_grep, {
-  desc = 'Live [g]rep'
+  desc = '[g] Live grep'
 })
 vim.api.nvim_create_user_command('ViewImage', function(opts)
-  vim.fn.system('kitty +kitten icat ' .. vim.fn.shellescape(opts.args))
+  if vim.fn.executable('chafa') ~= 1 then
+    vim.notify('Image preview requires Chafa (`brew install chafa`)', vim.log.levels.ERROR)
+    return
+  end
+
+  local path = opts.args ~= '' and vim.fn.expand(opts.args) or vim.api.nvim_buf_get_name(0)
+  path = vim.fn.fnamemodify(path, ':p')
+  if vim.fn.filereadable(path) ~= 1 then
+    vim.notify('Image not found: ' .. path, vim.log.levels.ERROR)
+    return
+  end
+
+  local width = math.max(20, math.floor(vim.o.columns * 0.8))
+  local height = math.max(10, math.floor((vim.o.lines - vim.o.cmdheight) * 0.8))
+  local bufnr = vim.api.nvim_create_buf(false, true)
+  local winid = vim.api.nvim_open_win(bufnr, true, {
+    relative = 'editor',
+    style = 'minimal',
+    border = 'rounded',
+    width = width,
+    height = height,
+    col = math.floor((vim.o.columns - width) / 2),
+    row = math.floor((vim.o.lines - height) / 2)
+  })
+
+  vim.bo[bufnr].bufhidden = 'wipe'
+  vim.bo[bufnr].swapfile = false
+  vim.fn.jobstart({
+    'chafa',
+    '--animate=off',
+    '--center=on',
+    '--format=symbols',
+    '--size',
+    string.format('%dx%d', width - 2, height - 2),
+    path
+  }, {
+    term = true,
+    on_exit = function(_, exit_code)
+      if exit_code ~= 0 then
+        vim.schedule(function()
+          vim.notify('Chafa could not preview: ' .. path, vim.log.levels.ERROR)
+        end)
+      end
+    end
+  })
+
+  local function close_preview()
+    if vim.api.nvim_win_is_valid(winid) then
+      vim.api.nvim_win_close(winid, true)
+    end
+  end
+  vim.keymap.set('n', 'q', close_preview, {
+    buffer = bufnr,
+    silent = true,
+    desc = '[q] Close image preview'
+  })
+  vim.keymap.set('n', '<Esc>', close_preview, {
+    buffer = bufnr,
+    silent = true,
+    desc = '[Esc] Close image preview'
+  })
 end, {
-  nargs = 1
+  nargs = '?',
+  complete = 'file',
+  desc = 'Preview an image with Chafa'
 })
-vim.api.nvim_create_user_command('CheckTerm', function()
-  print(vim.env.TERM)
-end, {})
 
 vim.keymap.set('n', '<leader>pb', builtin.buffers, {
-  desc = 'Find [b]uffers'
+  desc = '[b] Find buffers'
 })
 vim.keymap.set('n', '<leader>ph', builtin.help_tags, {
-  desc = 'Find [h]elp tags'
+  desc = '[h] Find help tags'
 })
 vim.keymap.set('n', '<leader>ps', builtin.grep_string, {
-  desc = 'Find grep [s]tring'
+  desc = '[s] Find grep string'
 })
 vim.keymap.set('n', '<leader>pd', builtin.diagnostics, {
-  desc = 'Find [d]iagnostics'
+  desc = '[d] Find diagnostics'
 })
-vim.keymap.set('n', '<C-l>', function()
-  -- Get the word under cursor
-  local word = vim.fn.expand('<cword>')
-  -- Create the log line
-  local log_text = string.format("console.log('%s :>> ', %s)", word, word)
 
-  -- Get current cursor position
-  local cursor_pos = vim.api.nvim_win_get_cursor(0)
-  local current_line = cursor_pos[1]
-
-  -- Insert the log in the next line
-  vim.api.nvim_buf_set_lines(0, current_line, current_line, false, {log_text})
-
-  -- Optional: Format the line (if you use a formatter)
-  -- vim.cmd('normal! =_')
-end, {
-  noremap = true,
-  desc = "Log word under cursor"
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('JavascriptKeymaps', {
+    clear = true
+  }),
+  pattern = {'javascript', 'javascriptreact', 'typescript', 'typescriptreact'},
+  callback = function(args)
+    vim.keymap.set('n', '<leader>cl', function()
+      local word = vim.fn.expand('<cword>')
+      local line = vim.api.nvim_win_get_cursor(0)[1]
+      vim.api.nvim_buf_set_lines(args.buf, line, line, false, {
+        string.format("console.log('%s :>> ', %s)", word, word)
+      })
+    end, {
+      buffer = args.buf,
+      desc = '[l] Log word under cursor'
+    })
+  end
 })
--- Copy and find word under cursor
-vim.keymap.set('n', '<C-f>', function()
-  -- Get the word under cursor
-  local word = vim.fn.expand('<cword>')
 
-  -- Yank the word to the unnamed register
+vim.keymap.set('n', '<leader>fw', function()
+  local word = vim.fn.expand('<cword>')
   vim.fn.setreg('"', word)
-
-  -- Enter command mode with the word pre-filled for searching
-  vim.api.nvim_feedkeys('/' .. word .. '\13', 'n', false)
+  vim.fn.search('\\V' .. vim.fn.escape(word, '\\'))
+  vim.cmd('normal! zz')
 end, {
-  noremap = true,
-  desc = "Copy and find word under cursor"
+  desc = '[w] Find word under cursor'
 })

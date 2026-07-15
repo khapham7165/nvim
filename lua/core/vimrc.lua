@@ -4,7 +4,7 @@ vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
-vim.wo.relativenumber = true
+vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.cursorline = true
 vim.opt.scrolloff = 19
@@ -22,7 +22,3 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end
 })
 vim.opt.display = "lastline"
-vim.g.indent_blankline_show_current_context = true
-vim.g.indent_blankline_context_patterns = { 'class', 'function', 'method', '^if', '^while', '^for', '^object', '^table',
-  'block', 'arguments' }
-vim.g.indent_blankline_char = '▏'

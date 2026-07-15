@@ -54,6 +54,7 @@ Mason automatically installs the configured language servers. Use `:Mason` to in
 │   ├── init.lua             Loads core modules
 │   ├── packer.lua           Plugin specifications
 │   ├── remap.lua            Global mappings and commands
+│   ├── telescope_preview.lua Image-aware Telescope previewer
 │   └── vimrc.lua            Editor options
 ├── after/plugin/            Plugin-specific configuration
 ├── plugin/packer_compiled.lua
@@ -64,17 +65,25 @@ Mason automatically installs the configured language servers. Use `:Mason` to in
 
 `<leader>` is Space. Open WhichKey after a prefix to discover related commands.
 
-### Buffers and windows
+Directional rule: lowercase `h` / `j` / `k` / `l` navigates; uppercase `H` / `J` / `K` / `L` moves the current item.
+
+### Buffers, tabs, and windows
 
 | Mapping | Action |
 |---|---|
 | `<leader>bh` / `<leader>bl` | Go to buffer left / right |
 | `[b` / `]b` | Previous / next buffer |
-| `<leader>bH` / `<leader>bL` | Close buffers left / right |
+| `<leader>bH` / `<leader>bL` | Move current buffer left / right |
+| `<leader>bCh` / `<leader>bCl` | Close buffers to the left / right |
+| `<leader>bCo` | Close all other buffers |
 | `<leader>bb` / `<leader>bc` | Pick buffer / pick buffer to close |
-| `<leader>bn` / `<leader>bm` | Move current buffer left / right |
+| `<leader>th` / `<leader>tl` | Go to the tab on the left / right |
+| `<leader>tH` / `<leader>tL` | Move the current tab left / right |
+| `<leader>t1` … `<leader>t9` | Go directly to tab 1–9 |
+| `<leader>tt` / `<leader>tc` / `<leader>to` | Create / close / close other tabs |
 | `<leader>wh/j/k/l` | Focus the window in that direction |
-| `<leader>wH/J/K/L` | Create a split in that direction |
+| `<leader>wH/J/K/L` | Move the current window in that direction |
+| `<leader>wsh/j/k/l` | Create a split in that direction |
 | `<leader>w+/-` | Increase / decrease window height |
 | `<leader>w</>` | Decrease / increase window width |
 
@@ -100,7 +109,7 @@ These mappings appear when an LSP client attaches.
 
 | Mapping | Action |
 |---|---|
-| `<leader>pa` / `<leader>pe` | Find all files / Git files |
+| `<leader>pa` / `<leader>pe` | Find all files with image previews / Git files |
 | `<leader>pg` / `<leader>ps` | Live grep / grep current string |
 | `<leader>pb` / `<leader>ph` | Buffers / help tags |
 | `<leader>pd` / `<leader>pf` | Diagnostics / document structure |
@@ -146,5 +155,5 @@ After changing plugin specifications, run `:PackerSync`. After changing only Lua
 
 - Run `:checkhealth` for environment and plugin diagnostics.
 - Run `:LspInfo` in a source buffer to inspect attached language servers.
-- Confirm image support with `chafa --version`; use `<leader>pi` or `:ViewImage path/to/image.png`.
+- Confirm image support with `chafa --version`; images render inside `<leader>pa`, while `<leader>pi` searches only media files and `:ViewImage path/to/image.png` opens a floating preview.
 - If `<leader>gg` reports that Lazygit is missing, install it with `brew install lazygit`.

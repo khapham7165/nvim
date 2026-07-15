@@ -31,7 +31,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>wj',
   rhs = '<C-w>j',
-  desc = '[j] Move to window below',
+  desc = '[j] Go to window below',
   opts = {
     noremap = true,
     silent = true
@@ -40,7 +40,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>wh',
   rhs = '<C-w>h',
-  desc = '[h] Move to window left',
+  desc = '[h] Go to window left',
   opts = {
     noremap = true,
     silent = true
@@ -49,7 +49,7 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>wk',
   rhs = '<C-w>k',
-  desc = '[k] Move to window above',
+  desc = '[k] Go to window above',
   opts = {
     noremap = true,
     silent = true
@@ -58,17 +58,17 @@ local all_keymaps = { -- Window navigation
   mode = 'n',
   lhs = '<leader>wl',
   rhs = '<C-w>l',
-  desc = '[l] Move to window right',
+  desc = '[l] Go to window right',
   opts = {
     noremap = true,
     silent = true
   }
-}, -- Window splitting
+}, -- Window movement
 {
   mode = 'n',
   lhs = '<leader>wJ',
-  rhs = ':sp<CR><C-w>j',
-  desc = '[J] Split window below',
+  rhs = '<C-w>J',
+  desc = '[J] Move window below',
   opts = {
     noremap = true,
     silent = true
@@ -76,8 +76,8 @@ local all_keymaps = { -- Window navigation
 }, {
   mode = 'n',
   lhs = '<leader>wK',
-  rhs = ':sp<CR><C-w>k',
-  desc = '[K] Split window above',
+  rhs = '<C-w>K',
+  desc = '[K] Move window above',
   opts = {
     noremap = true,
     silent = true
@@ -85,8 +85,8 @@ local all_keymaps = { -- Window navigation
 }, {
   mode = 'n',
   lhs = '<leader>wL',
-  rhs = ':vs<CR><C-w>l',
-  desc = '[L] Split window right',
+  rhs = '<C-w>L',
+  desc = '[L] Move window right',
   opts = {
     noremap = true,
     silent = true
@@ -94,8 +94,50 @@ local all_keymaps = { -- Window navigation
 }, {
   mode = 'n',
   lhs = '<leader>wH',
-  rhs = ':vs<CR><C-w>h',
-  desc = '[H] Split window left',
+  rhs = '<C-w>H',
+  desc = '[H] Move window left',
+  opts = {
+    noremap = true,
+    silent = true
+  }
+}, -- Window splitting
+{
+  mode = 'n',
+  lhs = '<leader>ws',
+  rhs = '<nop>',
+  desc = '[s] Split window commands'
+}, {
+  mode = 'n',
+  lhs = '<leader>wsj',
+  rhs = '<cmd>belowright split<CR>',
+  desc = '[j] Split below',
+  opts = {
+    noremap = true,
+    silent = true
+  }
+}, {
+  mode = 'n',
+  lhs = '<leader>wsk',
+  rhs = '<cmd>aboveleft split<CR>',
+  desc = '[k] Split above',
+  opts = {
+    noremap = true,
+    silent = true
+  }
+}, {
+  mode = 'n',
+  lhs = '<leader>wsl',
+  rhs = '<cmd>belowright vsplit<CR>',
+  desc = '[l] Split right',
+  opts = {
+    noremap = true,
+    silent = true
+  }
+}, {
+  mode = 'n',
+  lhs = '<leader>wsh',
+  rhs = '<cmd>aboveleft vsplit<CR>',
+  desc = '[h] Split left',
   opts = {
     noremap = true,
     silent = true
@@ -362,27 +404,9 @@ local all_keymaps = { -- Window navigation
   }
 }, {
   mode = 'n',
-  lhs = '<leader>tn',
-  rhs = ':tabnext<CR>',
-  desc = '[n] Go to next tab',
-  opts = {
-    noremap = true,
-    silent = true
-  }
-}, {
-  mode = 'n',
-  lhs = '<leader>tp',
+  lhs = '<leader>th',
   rhs = ':tabprevious<CR>',
-  desc = '[p] Go to previous tab',
-  opts = {
-    noremap = true,
-    silent = true
-  }
-}, {
-  mode = 'n',
-  lhs = '<leader>tr',
-  rhs = ':tabmove +1<CR>',
-  desc = '[r] Move tab right',
+  desc = '[h] Go to tab left',
   opts = {
     noremap = true,
     silent = true
@@ -390,13 +414,52 @@ local all_keymaps = { -- Window navigation
 }, {
   mode = 'n',
   lhs = '<leader>tl',
+  rhs = ':tabnext<CR>',
+  desc = '[l] Go to tab right',
+  opts = {
+    noremap = true,
+    silent = true
+  }
+}, {
+  mode = 'n',
+  lhs = '<leader>tL',
+  rhs = ':tabmove +1<CR>',
+  desc = '[L] Move tab right',
+  opts = {
+    noremap = true,
+    silent = true
+  }
+}, {
+  mode = 'n',
+  lhs = '<leader>tH',
   rhs = ':tabmove -1<CR>',
-  desc = '[l] Move tab left',
+  desc = '[H] Move tab left',
   opts = {
     noremap = true,
     silent = true
   }
 }}
+
+for tab_number = 1, 9 do
+  local target_tab = tab_number
+  table.insert(all_keymaps, {
+    mode = 'n',
+    lhs = string.format('<leader>t%d', target_tab),
+    rhs = function()
+      if target_tab > vim.fn.tabpagenr('$') then
+        vim.notify(string.format('Tab %d does not exist', target_tab), vim.log.levels.WARN)
+        return
+      end
+
+      vim.cmd('tabnext ' .. target_tab)
+    end,
+    desc = string.format('[%d] Go to tab %d', target_tab, target_tab),
+    opts = {
+      noremap = true,
+      silent = true
+    }
+  })
+end
 
 local function setup_keymaps()
   for _, keymap in ipairs(all_keymaps) do
@@ -442,22 +505,22 @@ vim.keymap.set('n', '<leader>bc', '<cmd>BufferLinePickClose<CR>', {
   desc = '[c] Pick buffer to close'
 })
 
--- Group actions that target all other buffers
-vim.keymap.set('n', '<leader>bo', '<nop>', {
-  desc = '[o] Other buffer commands'
+-- Buffer closing commands
+vim.keymap.set('n', '<leader>bC', '<nop>', {
+  desc = '[C] Close buffer commands'
 })
 
 -- Close the other buffers
-vim.keymap.set('n', '<leader>boc', '<cmd>BufferLineCloseOthers<CR>', {
-  desc = '[c] Close other buffers'
+vim.keymap.set('n', '<leader>bCo', '<cmd>BufferLineCloseOthers<CR>', {
+  desc = '[o] Close other buffers'
 })
 -- Close buffers on the right
-vim.keymap.set('n', '<leader>bL', '<cmd>BufferLineCloseRight<CR>', {
-  desc = '[L] Close buffers right'
+vim.keymap.set('n', '<leader>bCl', '<cmd>BufferLineCloseRight<CR>', {
+  desc = '[l] Close buffers right'
 })
 -- Close buffers on the left
-vim.keymap.set('n', '<leader>bH', '<cmd>BufferLineCloseLeft<CR>', {
-  desc = '[H] Close buffers left'
+vim.keymap.set('n', '<leader>bCh', '<cmd>BufferLineCloseLeft<CR>', {
+  desc = '[h] Close buffers left'
 })
 
 -- Pick a buffer to go to
@@ -476,13 +539,13 @@ vim.keymap.set('n', '<leader>bt', '<cmd>BufferLineSortByExtension<CR>', {
 })
 
 -- Move the current buffer to the left
-vim.keymap.set('n', '<leader>bn', '<cmd>BufferLineMovePrev<CR>', {
-  desc = '[n] Move buffer left'
+vim.keymap.set('n', '<leader>bH', '<cmd>BufferLineMovePrev<CR>', {
+  desc = '[H] Move buffer left'
 })
 
 -- Move the current buffer to the right
-vim.keymap.set('n', '<leader>bm', '<cmd>BufferLineMoveNext<CR>', {
-  desc = '[m] Move buffer right'
+vim.keymap.set('n', '<leader>bL', '<cmd>BufferLineMoveNext<CR>', {
+  desc = '[L] Move buffer right'
 })
 
 -- Toggle the current buffer's pin
@@ -526,9 +589,6 @@ vim.keymap.set('n', '<leader>by', function()
 end, {
   silent = true,
   desc = '[y] Copy buffer path'
-})
-vim.keymap.set('n', '<leader>pa', builtin.find_files, {
-  desc = '[a] Find all files'
 })
 vim.keymap.set('n', '<leader>pe', builtin.git_files, {
   desc = '[e] Explore git files'

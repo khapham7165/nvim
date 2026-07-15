@@ -1,5 +1,8 @@
--- Setup in your configuration
-require('telescope').setup {
+local telescope = require('telescope')
+local builtin = require('telescope.builtin')
+local telescope_preview = require('core.telescope_preview')
+
+telescope.setup {
   defaults = {
     borderchars = {
       prompt = {"─", "│", "─", "│", "╭", "╮", "╯", "╰"},
@@ -24,7 +27,16 @@ require('telescope').setup {
   }
 }
 
-require('telescope').load_extension('media_files')
-vim.keymap.set('n', '<leader>pi', require('telescope').extensions.media_files.media_files, {
+telescope.load_extension('media_files')
+
+vim.keymap.set('n', '<leader>pa', function()
+  builtin.find_files({
+    previewer = telescope_preview.new()
+  })
+end, {
+  desc = '[a] Find all files'
+})
+
+vim.keymap.set('n', '<leader>pi', telescope.extensions.media_files.media_files, {
   desc = '[i] Image preview'
 })
